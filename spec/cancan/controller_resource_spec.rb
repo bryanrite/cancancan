@@ -333,11 +333,24 @@ describe CanCan::ControllerResource do
       expect { resource.authorize_resource }.to raise_error(CanCan::AccessDenied)
     end
 
+    it 'calls authorize! for authorize_resource! (BANG)' do
+      allow(controller).to receive(:authorize!) { raise 'expectable_error'  }
+      resource = CanCan::ControllerResource.new(controller)
+      expect { resource.authorize_resource! }.to raise_error('expectable_error')
+    end
+
     it 'calls load_resource and authorize_resource for load_and_authorize_resource' do
       resource = CanCan::ControllerResource.new(controller)
       expect(resource).to receive(:load_resource)
       expect(resource).to receive(:authorize_resource)
       resource.load_and_authorize_resource
+    end
+
+    it 'calls load_resource and authorize_resource for load_and_authorize_resource! (BANG)' do
+      resource = CanCan::ControllerResource.new(controller)
+      expect(resource).to receive(:load_resource)
+      expect(resource).to receive(:authorize_resource)
+      resource.load_and_authorize_resource!
     end
 
     it 'loads resource through the association of another parent resource using instance variable' do
