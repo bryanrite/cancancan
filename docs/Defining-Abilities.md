@@ -34,6 +34,7 @@ You can pass `:manage` to represent any action and `:all` to represent any objec
 can :manage, Article  # user can perform any action on the article
 can :read, :all       # user can read any object
 can :manage, :all     # user can perform any action on any object
+cannot :manage, :all  # user cannot perform any action on any object
 ```
 
 Common actions are `:read`, `:create`, `:update` and `:destroy` but it can be anything. See [Action Aliases](./Action-Aliases.md) and [Custom Actions](./Custom-Actions.md) for more information on actions.
