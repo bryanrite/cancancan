@@ -1090,5 +1090,25 @@ describe CanCan::ModelAdapters::ActiveRecordAdapter do
       expect(ability).to be_able_to(:read, motorbike)
       expect(ability).to be_able_to(:read, Suzuki.new)
     end
+
+    it 'recognises conflicting rules' do
+      u1 = User.create!(name: 'pippo')
+      car = Car.create!
+      motorbike = Motorbike.create!
+      suzuki = Suzuki.create!
+
+      ability = Ability.new(u1)
+      ability.can :read, Vehicle
+      ability.cannot :read, Motorbike
+
+      expect(ability).to be_able_to(:read, car)
+      expect(ability).to_not be_able_to(:read, motorbike)
+      expect(ability).to_not be_able_to(:read, suzuki)
+
+      expect(Vehicle.accessible_by(ability)).to match_array([car])
+      expect(Car.accessible_by(ability)).to match_array([car])
+      expect(Motorbike.accessible_by(ability)).to match_array([])
+      expect(Suzuki.accessible_by(ability)).to match_array([])
+    end
   end
 end
