@@ -1,5 +1,6 @@
 ## 3.3.0
 
+* [#653](https://github.com/CanCanCommunity/cancancan/pull/653): Add support for using an nil relation as a condition. ([@ghiculescu][])
 * [#675](https://github.com/CanCanCommunity/cancancan/pull/675): Support modifying the `accessible_by` querying strategy on a per-query basis. ([@ghiculescu][])
 * [#714](https://github.com/CanCanCommunity/cancancan/pull/714): Don't hold unnecessary references to subjects in @rules_index. ([@mtoneil][])
 
